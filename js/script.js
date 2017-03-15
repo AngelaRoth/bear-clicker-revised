@@ -141,18 +141,28 @@ var bearView = {
 
 var adminView = {
   init: function() {
+    bear = octopus.getCurrentBear();
     this.formElem = document.getElementById('adminForm');
+
     this.nameElem = document.getElementById('adminName');
+    this.nameElem.value = bear.name;
+
     this.imgSourceElem = document.getElementById('adminImgSource');
+    this.imgSourceElem.value = bear.img;
+
     this.clicksElem = document.getElementById('adminClicks');
+    this.clicksElem.value = bear.clicks;
+
     this.adminButton = document.getElementById('adminShow');
     this.adminButton.addEventListener('click', function() {
       octopus.openAdmin();
     });
+
     this.cancelButton = document.getElementById('adminCancel');
     this.cancelButton.addEventListener('click', function() {
       octopus.closeAdmin();
     });
+
     this.saveButton = document.getElementById('adminSave');
     this.saveButton.addEventListener('click', function() {
       octopus.saveAdmin();
