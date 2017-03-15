@@ -25,16 +25,20 @@
     </div>
     <div class="admin">
       <button id="adminShow">Admin</button>
-      <form class="admin-form">
-        <div class="admin-label">Name</div>
-        <input class="admin-content" type="text" id="adminName">
-        <div class="admin-label">Image URL</div>
-        <input class="admin-content" type="text" id="adminURL">
-        <div class="admin-label"># of Clicks</div>
-        <input class="admin-content" type="text" id="adminClicks">
-      </form>
-      <button id="adminCancel">Cancel</button>
-      <button id="adminSave">Save</button>
+      <div id="adminForm">
+        <form>
+          <div class="admin-label">Name</div>
+          <input id="adminName" class="admin-content" type="text">
+          <div class="admin-label">Image Source</div>
+          <input id="adminImgSource" class="admin-content" type="text">
+          <div class="admin-label"># of Clicks</div>
+          <input id="adminClicks" class="admin-content" type="text">
+        </form>
+        <div class="admin-buttons">
+          <button id="adminCancel">Cancel</button>
+          <button id="adminSave">Save</button>
+        </div>
+      </div>
     </div>
   </div>
 

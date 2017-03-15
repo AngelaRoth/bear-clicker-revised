@@ -28,6 +28,7 @@ var octopus = {
 
     listView.init();
     bearView.init(model.currentBear);
+    adminView.init();
   },
 
   getBears: function() {
@@ -54,6 +55,34 @@ var octopus = {
     } else {
       bearView.containerElem.classList.remove('fiveClick');
     }
+  },
+
+  openAdmin: function() {
+    adminView.formElem.classList.remove('hidden');
+  },
+
+  closeAdmin: function() {
+    adminView.formElem.classList.add('hidden');
+  },
+
+  saveAdmin: function() {
+    var bear = this.getCurrentBear();
+    var newName = adminView.nameElem.value;
+    var newImg = adminView.imgSourceElem.value;
+    var newClicks = adminView.clicksElem.value;
+    if (newName) {
+      bear.name = newName;
+    }
+    if (newImg) {
+      bear.img = newImg;
+    }
+    if (newClicks && !isNaN(newClicks)) {
+      bear.clicks = newClicks;
+    }
+
+    this.closeAdmin();
+    listView.render();
+    bearView.render();
   }
 };
 
@@ -67,6 +96,9 @@ var listView = {
     var bear, listItem;
     var bearArray = octopus.getBears();
     var currentBear = octopus.getCurrentBear();
+
+    this.bearList.innerHTML = '';
+
     for (var i = 0; i < bearArray.length; i++) {
       bear = bearArray[i];
       listItem = document.createElement('li');
@@ -104,6 +136,29 @@ var bearView = {
     this.countElem.innerHTML = bear.clicks + ' Salmon';
 
     octopus.checkFiveClick();
+  }
+};
+
+var adminView = {
+  init: function() {
+    this.formElem = document.getElementById('adminForm');
+    this.nameElem = document.getElementById('adminName');
+    this.imgSourceElem = document.getElementById('adminImgSource');
+    this.clicksElem = document.getElementById('adminClicks');
+    this.adminButton = document.getElementById('adminShow');
+    this.adminButton.addEventListener('click', function() {
+      octopus.openAdmin();
+    });
+    this.cancelButton = document.getElementById('adminCancel');
+    this.cancelButton.addEventListener('click', function() {
+      octopus.closeAdmin();
+    });
+    this.saveButton = document.getElementById('adminSave');
+    this.saveButton.addEventListener('click', function() {
+      octopus.saveAdmin();
+    });
+
+    octopus.closeAdmin();
   }
 };
 

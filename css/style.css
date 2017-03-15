@@ -70,6 +70,10 @@ li {
   align-items: center;
 }
 
+#imgElem {
+  width: 200px;
+}
+
 .count {
   font-size: 16pt;
 }
@@ -79,7 +83,7 @@ li {
 }
 
 
-.admin-form {
+#adminForm {
     margin: 15px;
 }
 
@@ -90,4 +94,13 @@ li {
 .admin-content {
     width:100%;
     font-size: 1.3em;
+}
+
+.admin-buttons {
+  padding-top: 20px;
+}
+
+.hidden {
+    visibility: hidden;
+    height: 0;
 }
