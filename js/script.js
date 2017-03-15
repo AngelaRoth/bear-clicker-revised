@@ -111,6 +111,7 @@ var listView = {
       listItem.addEventListener('click', (function(bearCopy) {
         return function() {
           octopus.setCurrentBear(bearCopy);
+          octopus.closeAdmin();
           bearView.render();
         }
       })(bear));
