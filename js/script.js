@@ -58,7 +58,12 @@ var octopus = {
   },
 
   openAdmin: function() {
+    var bear = this.getCurrentBear();
     adminView.formElem.classList.remove('hidden');
+    adminView.nameElem.value = bear.name;
+    adminView.imgSourceElem.value = bear.img;
+    adminView.clicksElem.value = bear.clicks;
+
   },
 
   closeAdmin: function() {
@@ -143,15 +148,9 @@ var adminView = {
   init: function() {
     bear = octopus.getCurrentBear();
     this.formElem = document.getElementById('adminForm');
-
     this.nameElem = document.getElementById('adminName');
-    this.nameElem.value = bear.name;
-
     this.imgSourceElem = document.getElementById('adminImgSource');
-    this.imgSourceElem.value = bear.img;
-
     this.clicksElem = document.getElementById('adminClicks');
-    this.clicksElem.value = bear.clicks;
 
     this.adminButton = document.getElementById('adminShow');
     this.adminButton.addEventListener('click', function() {
