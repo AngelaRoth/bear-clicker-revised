@@ -16,15 +16,25 @@
         </ul>
       </div>
       <div id="allBears">
-<!--
-                <div class="bearContainer">
-                  <h2></h2>
-                  <img src="" alt="">
-                  <p class="count"></p>
-                </div>
-         -->
-        <!-- Populated by Bear method enterHTML -->
+        <div id="bearContainer">
+          <h2 id="nameElem"></h2>
+          <img id="imgElem" src="" alt="">
+          <p id="countElem" class="count"></p>
+        </div>
       </div>
+    </div>
+    <div class="admin">
+      <button id="adminShow">Admin</button>
+      <form class="admin-form">
+        <div class="admin-label">Name</div>
+        <input class="admin-content" type="text" id="adminName">
+        <div class="admin-label">Image URL</div>
+        <input class="admin-content" type="text" id="adminURL">
+        <div class="admin-label"># of Clicks</div>
+        <input class="admin-content" type="text" id="adminClicks">
+      </form>
+      <button id="adminCancel">Cancel</button>
+      <button id="adminSave">Save</button>
     </div>
   </div>
 

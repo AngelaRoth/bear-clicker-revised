@@ -1,49 +1,19 @@
 var Bear = function(name, i) {
-  // Names of bears in nameArray correspond to names of jpg files.
   this.img = 'images/' + name + '.jpg';
   this.name = name;
   this.clicks = 0;
-
-  // Make the Heading for the Bear Container
-  this.nameElem = document.createElement('h2');
-  this.nameElem.innerHTML = this.name;
-
-  // Make the Image for the Bear Container
-  this.imgElem = document.createElement('img');
-  this.imgElem.id = 'bear' + i;
-  this.imgElem.src = this.img;
-  this.imgElem.alt = this.name;
-  // Attach an event listener which calls the bearClicked function on
-  // the bear stored in this bear's place in the bearArray
-  this.imgElem.addEventListener('click', function() {
-    octopus.bearClicked();
-  });
-
-  // Make the Paragraph which contains info on number of clicks (salmon)
-  this.countPara = document.createElement('p');
-  this.countPara.id = 'count' + i;
-  this.countPara.className = 'count';
-  this.countPara.innerHTML = this.clicks + ' Salmon';
-
-  // Make the container which will hold all this bear's information
-  this.container = document.createElement('div');
-  this.container.className = 'bearContainer';
-  this.container.appendChild(this.nameElem);
-  this.container.appendChild(this.imgElem);
-  this.container.appendChild(this.countPara);
 };
 
 var model = {
-  // All our bears: names correspond to file names of jpg's
   nameArray: ['vonGrizzmon', 'Fuzzy', 'Whitey', 'Vera', 'Zeke', 'Moz', 'Splash', 'Colleen'],
-  /*numBears: model.nameArray.length,*/
   bearArray: [],
   currentBear: null,
 
   init: function() {
     // Make a NEW Bear for every name in nameArray
     // Store new Bears in bearArray
-    for (var i = 0; i < this.nameArray.length; i++) {
+    this.numBears = this.nameArray.length;
+    for (var i = 0; i < this.numBears; i++) {
       this.bearArray[i] = new Bear(this.nameArray[i], i);
     }
 
@@ -72,14 +42,17 @@ var octopus = {
     model.currentBear = bear;
   },
 
-  bearClicked: function(i) {
+  bearClicked: function() {
     model.currentBear.clicks ++;
-    model.currentBear.countPara.innerHTML = model.currentBear.clicks + ' Salmon';
+    /*this.checkFiveClick();*/
+    bearView.render();
+  },
 
-    if (model.currentBear.clicks % 5 === 0) {
-      model.currentBear.container.classList.add('fiveClick');
+  checkFiveClick: function() {
+    if (model.currentBear.clicks % 5 === 0 && model.currentBear.clicks !== 0) {
+      bearView.containerElem.classList.add('fiveClick');
     } else {
-      model.currentBear.container.classList.remove('fiveClick');
+      bearView.containerElem.classList.remove('fiveClick');
     }
   }
 };
@@ -100,11 +73,8 @@ var listView = {
       listItem.innerHTML = bear.name;
       listItem.addEventListener('click', (function(bearCopy) {
         return function() {
-          /*if (bearCopy !== currentBear) {*/
-            bearView.removeCurrentBear();
-            bearView.render(bearCopy);
-            octopus.setCurrentBear(bearCopy);
-          /*}*/
+          octopus.setCurrentBear(bearCopy);
+          bearView.render();
         }
       })(bear));
 
@@ -115,17 +85,25 @@ var listView = {
 
 var bearView = {
   init: function(firstBear) {
-    this.allBears = document.getElementById('allBears');
-    this.render(firstBear);
+    this.containerElem = document.getElementById('bearContainer');
+    this.nameElem = document.getElementById('nameElem');
+    this.imgElem = document.getElementById('imgElem');
+    this.countElem = document.getElementById('countElem');
+    this.imgElem.addEventListener('click', function() {
+      octopus.bearClicked();
+    });
+
+    this.render();
   },
 
-  removeCurrentBear: function() {
-    var currentBear = octopus.getCurrentBear();
-    this.allBears.removeChild(currentBear.container);
-  },
+  render: function() {
+    var bear = octopus.getCurrentBear();
+    this.nameElem.innerHTML = bear.name;
+    this.imgElem.src = bear.img;
+    this.imgElem.alt = bear.name;
+    this.countElem.innerHTML = bear.clicks + ' Salmon';
 
-  render: function(bear) {
-    this.allBears.appendChild(bear.container);
+    octopus.checkFiveClick();
   }
 };
 

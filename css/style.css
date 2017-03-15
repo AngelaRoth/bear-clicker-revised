@@ -61,7 +61,7 @@ li {
   font-size: 14pt;
 }
 
-.bearContainer {
+#bearContainer {
   padding: 5px 25px;
   background-color: #F7A607;
 
@@ -75,5 +75,19 @@ li {
 }
 
 .fiveClick {
-  background-color: red;
+  background-color: red !important;
+}
+
+
+.admin-form {
+    margin: 15px;
+}
+
+.admin-label {
+  padding-top: 10px;
+  padding-bottom: 3px;
+}
+.admin-content {
+    width:100%;
+    font-size: 1.3em;
 }
